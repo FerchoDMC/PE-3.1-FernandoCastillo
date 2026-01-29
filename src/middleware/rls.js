@@ -6,7 +6,7 @@
 5. usuario solo vea sus reqistros
 */
 
-function buildRLSFilter(user){
+export function buildRLSFilter(user){
     if(user.role === "admin"){
         return {clause: "1=1", param:[]};
     }
@@ -14,10 +14,9 @@ function buildRLSFilter(user){
 }
 
 //verificar si el usuario es dueño de un registroespecifico
-async function verifyOwnership(pool, table, recorId, userId){
+export async function verifyOwnership(pool, table, recorId, userId){
     const [rows] = await pool.query(`SELECT user_id FROM ${table} WHERE id = ?`, [recorId]);
     if(rows.length === 0) return false; //registro no existe
 
     return rows[0].user_id === userId; // este es el dueño del registro??
 }
-export default {buildRLSFilter, verifyOwnership};

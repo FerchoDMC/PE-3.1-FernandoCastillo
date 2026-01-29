@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
-import pool from "../config/databse.js";
+import {pool} from "../config/database.js";
 
-async function authRoutes(fastify, options) {
+export default async function authRoutes(fastify, options) {
     fastify.post("/register", {
         schema: {
             body: {
